@@ -27,6 +27,7 @@ export default function CountUp({
   onEnd
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const hasStartedRef = useRef(false);
   const motionValue = useMotionValue(direction === 'down' ? to : from);
 
   const damping = 20 + 40 * (1 / duration);
@@ -73,19 +74,69 @@ export default function CountUp({
     if (ref.current) {
       ref.current.textContent = formatValue(direction === 'down' ? to : from);
     }
-  }, [from, to, direction, formatValue]);
+    hasStartedRef.current = false;
+    motionValue.set(direction === 'down' ? to : from);
+  }, [from, to, direction, formatValue, motionValue]);
+
+  const isActuallyVisible = useCallback((element: HTMLElement) => {
+    const rect = element.getBoundingClientRect();
+    const withinViewport =
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < window.innerHeight &&
+      rect.left < window.innerWidth;
+
+    if (!withinViewport) {
+      return false;
+    }
+
+    let node: HTMLElement | null = element;
+    let opacityProduct = 1;
+
+    while (node) {
+      const style = window.getComputedStyle(node);
+
+      if (style.display === 'none' || style.visibility === 'hidden') {
+        return false;
+      }
+
+      opacityProduct *= Number(style.opacity || '1');
+
+      if (opacityProduct < 0.6) {
+        return false;
+      }
+
+      node = node.parentElement;
+    }
+
+    return true;
+  }, []);
 
   useEffect(() => {
-    if (isInView && startWhen) {
+    if (!isInView || !startWhen || hasStartedRef.current) {
+      return;
+    }
+
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let durationTimeoutId: ReturnType<typeof setTimeout> | null = null;
+    let frameId = 0;
+
+    const startAnimation = () => {
+      if (hasStartedRef.current) {
+        return;
+      }
+
+      hasStartedRef.current = true;
+
       if (typeof onStart === 'function') {
         onStart();
       }
 
-      const timeoutId = setTimeout(() => {
+      timeoutId = setTimeout(() => {
         motionValue.set(direction === 'down' ? from : to);
       }, delay * 1000);
 
-      const durationTimeoutId = setTimeout(
+      durationTimeoutId = setTimeout(
         () => {
           if (typeof onEnd === 'function') {
             onEnd();
@@ -93,13 +144,47 @@ export default function CountUp({
         },
         delay * 1000 + duration * 1000
       );
+    };
 
-      return () => {
+    const waitForVisible = () => {
+      if (!ref.current || hasStartedRef.current) {
+        return;
+      }
+
+      if (isActuallyVisible(ref.current)) {
+        startAnimation();
+        return;
+      }
+
+      frameId = requestAnimationFrame(waitForVisible);
+    };
+
+    waitForVisible();
+
+    return () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
+      if (timeoutId) {
         clearTimeout(timeoutId);
+      }
+      if (durationTimeoutId) {
         clearTimeout(durationTimeoutId);
-      };
-    }
-  }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration]);
+      }
+    };
+  }, [
+    delay,
+    direction,
+    duration,
+    from,
+    isActuallyVisible,
+    isInView,
+    motionValue,
+    onEnd,
+    onStart,
+    startWhen,
+    to,
+  ]);
 
   useEffect(() => {
     const unsubscribe = springValue.on('change', (latest: number) => {
