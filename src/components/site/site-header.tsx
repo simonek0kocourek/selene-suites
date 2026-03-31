@@ -29,18 +29,18 @@ export function SiteHeader() {
         <GlassSurface
           width="100%"
           height={74}
-          borderRadius={999}
-          borderWidth={0.09}
-          brightness={56}
-          opacity={0.9}
-          blur={12}
-          displace={0.8}
-          backgroundOpacity={0.12}
-          saturation={1.45}
-          distortionScale={-110}
+          borderRadius={50}
+          borderWidth={0.07}
+          brightness={50}
+          opacity={0.93}
+          blur={11}
+          displace={0.5}
+          backgroundOpacity={0.1}
+          saturation={1}
+          distortionScale={-120}
           redOffset={0}
-          greenOffset={8}
-          blueOffset={18}
+          greenOffset={10}
+          blueOffset={20}
           mixBlendMode="screen"
           className="w-full"
         >
