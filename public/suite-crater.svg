@@ -1,0 +1,30 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="craterSky" x1="400" y1="96" x2="400" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1A36"/>
+      <stop offset="1" stop-color="#050816"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(514 244) rotate(90) scale(160)">
+      <stop stop-color="#90E3FF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#90E3FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="800" rx="80" fill="url(#craterSky)"/>
+  <ellipse cx="514" cy="244" rx="152" ry="108" fill="url(#glow)"/>
+  <path d="M0 616C142 520 276 468 402 460C534 452 667 496 800 600V800H0V616Z" fill="#0A1122"/>
+  <path d="M0 674C136 604 261 566 374 564C508 562 644 608 800 710V800H0V674Z" fill="#13203C"/>
+
+  <path d="M164 548C244 438 336 392 434 390C535 388 626 435 706 540" stroke="#F6E7C7" stroke-opacity="0.3" stroke-width="3"/>
+  <path d="M194 550C266 460 343 420 432 418C523 416 598 458 674 548" stroke="#90E3FF" stroke-width="4" stroke-linecap="round"/>
+
+  <g>
+    <path d="M248 528H564C587 528 606 547 606 570V610C606 633 587 652 564 652H248C225 652 206 633 206 610V570C206 547 225 528 248 528Z" fill="#0A152C" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+    <path d="M270 494H542C564 494 582 512 582 534V550H230V534C230 512 248 494 270 494Z" fill="#101F40" stroke="rgba(144,227,255,0.26)" stroke-width="2"/>
+    <rect x="298" y="552" width="216" height="54" rx="27" fill="#11264A" stroke="rgba(246,231,199,0.18)" stroke-width="2"/>
+    <rect x="324" y="572" width="164" height="14" rx="7" fill="#90E3FF" fill-opacity="0.68"/>
+  </g>
+
+  <path d="M126 248L140 216L154 248L186 262L154 276L140 308L126 276L94 262L126 248Z" fill="#90E3FF" fill-opacity="0.1" stroke="#90E3FF" stroke-opacity="0.56" stroke-width="2"/>
+  <path d="M654 328L670 292L686 328L722 344L686 360L670 396L654 360L618 344L654 328Z" fill="#FF9F8D" fill-opacity="0.1" stroke="#FF9F8D" stroke-opacity="0.54" stroke-width="2"/>
+</svg>

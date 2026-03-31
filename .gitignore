@@ -1,0 +1,23 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+
+temporary screenshots/
+tmp-moon-hotel/
+_reactbits_upstream/
+
+server-*.log
+server-*.err
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.claude/settings.local.json
+
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
