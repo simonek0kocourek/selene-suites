@@ -36,7 +36,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-screen overflow-x-clip">
       <FloatingLinesBackdrop variant="global" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(246,231,199,0.06),transparent_20%),radial-gradient(circle_at_20%_18%,rgba(144,227,255,0.08),transparent_26%),linear-gradient(180deg,rgba(5,8,22,0.28),rgba(5,8,22,0.48))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_65%,rgba(120,62,255,0.08),transparent_26%),linear-gradient(180deg,rgba(3,4,15,0.14),rgba(3,4,15,0.22))]" />
       <div className="relative z-10 flex min-h-screen flex-col">
         <a
           href="#main-content"

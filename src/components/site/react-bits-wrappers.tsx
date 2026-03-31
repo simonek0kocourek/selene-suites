@@ -281,19 +281,20 @@ export function FloatingLinesBackdrop({
       <div className={cn('absolute inset-0', isGlobal ? 'opacity-[0.9]' : 'opacity-[0.78]')}>
         <FloatingLines
           enabledWaves={['top', 'middle', 'bottom']}
-          lineCount={isGlobal ? [9, 13, 18] : [6, 9, 12]}
-          lineDistance={isGlobal ? [12, 9, 6] : [9, 7, 5]}
-          topWavePosition={{ x: 10.5, y: 0.6, rotate: -0.45 }}
-          middleWavePosition={{ x: 5.4, y: 0.02, rotate: 0.16 }}
-          bottomWavePosition={{ x: 2.2, y: -0.72, rotate: 0.38 }}
-          animationSpeed={isGlobal ? 0.82 : 0.68}
+          lineCount={5}
+          lineDistance={5}
+          topWavePosition={{ x: 10.0, y: 0.5, rotate: -0.4 }}
+          middleWavePosition={{ x: 5.0, y: 0.0, rotate: 0.2 }}
+          bottomWavePosition={{ x: 2.0, y: -0.7, rotate: -1 }}
+          animationSpeed={1}
           interactive
-          bendRadius={isGlobal ? 3.9 : 4.6}
-          bendStrength={isGlobal ? -0.24 : -0.18}
-          mouseDamping={0.065}
+          bendRadius={5}
+          bendStrength={-0.5}
+          mouseDamping={0.05}
           parallax
-          parallaxStrength={isGlobal ? 0.14 : 0.08}
-          linesGradient={['#0d1327', '#1f3253', '#335f8b', '#7ec8e5', '#f2e2b8']}
+          parallaxStrength={0.16}
+          globalPointerTracking={isGlobal}
+          linesGradient={['#241042', '#5f32d6', '#5c6fff', '#dc72ff']}
           mixBlendMode="screen"
         />
       </div>

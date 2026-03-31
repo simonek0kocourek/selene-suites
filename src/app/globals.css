@@ -109,10 +109,8 @@
   body {
     @apply min-h-screen bg-background text-foreground;
     background-image:
-      radial-gradient(circle at top, rgba(144, 227, 255, 0.12), transparent 28%),
-      radial-gradient(circle at 20% 20%, rgba(255, 159, 141, 0.1), transparent 20%),
-      radial-gradient(circle at 80% 10%, rgba(246, 231, 199, 0.11), transparent 24%),
-      linear-gradient(180deg, #040611 0%, #050816 42%, #071122 100%);
+      radial-gradient(circle at 50% 75%, rgba(120, 62, 255, 0.06), transparent 24%),
+      linear-gradient(180deg, #04020c 0%, #050613 42%, #070a18 100%);
     background-attachment: fixed;
   }
 

@@ -228,6 +228,7 @@ type FloatingLinesProps = {
   mouseDamping?: number;
   parallax?: boolean;
   parallaxStrength?: number;
+  globalPointerTracking?: boolean;
   mixBlendMode?: CSSProperties['mixBlendMode'];
 };
 
@@ -270,6 +271,7 @@ export default function FloatingLines({
   mouseDamping = 0.05,
   parallax = true,
   parallaxStrength = 0.2,
+  globalPointerTracking = false,
   mixBlendMode = 'screen',
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -468,8 +470,14 @@ export default function FloatingLines({
     };
 
     if (interactive) {
-      renderer.domElement.addEventListener('pointermove', handlePointerMove);
-      renderer.domElement.addEventListener('pointerleave', handlePointerLeave);
+      if (globalPointerTracking) {
+        window.addEventListener('pointermove', handlePointerMove, { passive: true });
+        window.addEventListener('pointerleave', handlePointerLeave);
+        window.addEventListener('blur', handlePointerLeave);
+      } else {
+        renderer.domElement.addEventListener('pointermove', handlePointerMove);
+        renderer.domElement.addEventListener('pointerleave', handlePointerLeave);
+      }
     }
 
     let frameId = 0;
@@ -509,8 +517,14 @@ export default function FloatingLines({
       }
 
       if (interactive) {
-        renderer.domElement.removeEventListener('pointermove', handlePointerMove);
-        renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
+        if (globalPointerTracking) {
+          window.removeEventListener('pointermove', handlePointerMove);
+          window.removeEventListener('pointerleave', handlePointerLeave);
+          window.removeEventListener('blur', handlePointerLeave);
+        } else {
+          renderer.domElement.removeEventListener('pointermove', handlePointerMove);
+          renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
+        }
       }
 
       geometry.dispose();
@@ -540,6 +554,7 @@ export default function FloatingLines({
     mouseDamping,
     parallax,
     parallaxStrength,
+    globalPointerTracking,
     topLineCount,
     topLineDistance,
     topWavePosition,
