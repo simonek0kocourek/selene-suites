@@ -5,6 +5,7 @@ import AnimatedContent from '@/components/AnimatedContent';
 import CountUp from '@/components/CountUp';
 import DarkVeil from '@/components/DarkVeil';
 import DotGrid from '@/components/DotGrid';
+import FloatingLines from '@/components/FloatingLines';
 import GradientText from '@/components/GradientText';
 import Particles from '@/components/Particles';
 import SplitText from '@/components/SplitText';
@@ -239,6 +240,61 @@ export function DarkVeilBackdrop({
           scanlineFrequency={isGlobal ? 0.4 : 1.2}
           warpAmount={isGlobal ? 0.14 : 0.18}
           resolutionScale={1}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function FloatingLinesBackdrop({
+  className,
+  variant = 'global',
+}: {
+  className?: string;
+  variant?: 'section' | 'global';
+}) {
+  const reducedMotion = useReducedMotion();
+  const isGlobal = variant === 'global';
+
+  if (reducedMotion) {
+    return (
+      <div
+        aria-hidden="true"
+        className={cn(
+          isGlobal
+            ? 'fixed inset-0 bg-[linear-gradient(180deg,#050816_0%,#071122_100%),repeating-linear-gradient(112deg,transparent_0,transparent_34px,rgba(144,227,255,0.1)_35px,transparent_62px)] opacity-85'
+            : 'absolute inset-0 bg-[linear-gradient(180deg,#091022_0%,#050816_100%),repeating-linear-gradient(112deg,transparent_0,transparent_26px,rgba(144,227,255,0.08)_27px,transparent_46px)] opacity-70',
+          className
+        )}
+      />
+    );
+  }
+
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        isGlobal ? 'fixed inset-0 overflow-hidden pointer-events-none' : 'absolute inset-0 overflow-hidden',
+        className
+      )}
+    >
+      <div className={cn('absolute inset-0', isGlobal ? 'opacity-[0.9]' : 'opacity-[0.78]')}>
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={isGlobal ? [9, 13, 18] : [6, 9, 12]}
+          lineDistance={isGlobal ? [12, 9, 6] : [9, 7, 5]}
+          topWavePosition={{ x: 10.5, y: 0.6, rotate: -0.45 }}
+          middleWavePosition={{ x: 5.4, y: 0.02, rotate: 0.16 }}
+          bottomWavePosition={{ x: 2.2, y: -0.72, rotate: 0.38 }}
+          animationSpeed={isGlobal ? 0.82 : 0.68}
+          interactive
+          bendRadius={isGlobal ? 3.9 : 4.6}
+          bendStrength={isGlobal ? -0.24 : -0.18}
+          mouseDamping={0.065}
+          parallax
+          parallaxStrength={isGlobal ? 0.14 : 0.08}
+          linesGradient={['#0d1327', '#1f3253', '#335f8b', '#7ec8e5', '#f2e2b8']}
+          mixBlendMode="screen"
         />
       </div>
     </div>

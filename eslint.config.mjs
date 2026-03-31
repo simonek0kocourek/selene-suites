@@ -18,6 +18,7 @@ const eslintConfig = defineConfig([
   {
     files: [
       "src/components/DotGrid.tsx",
+      "src/components/FloatingLines.tsx",
       "src/components/SplitText.tsx",
       "src/components/GradientText.tsx",
     ],
