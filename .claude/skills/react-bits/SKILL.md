@@ -39,4 +39,4 @@ Use this skill as a router into the smallest relevant React Bits file.
 - `text-animations/`: hero headings, section titles, badges, counters, editorial typography
 - `animations/`: wrappers, hover effects, cursor effects, CTA accents, decorative motion
 - `components/`: cards, galleries, navs, menus, lists, carousels, interactive sections
-- `backgrounds/`: hero backdrops, ambient section layers, dramatic visual canvases
+- `backgrounds/`: whole page backgrounds, hero backdrops, ambient section layers, dramatic visual canvases
